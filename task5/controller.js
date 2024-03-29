@@ -16,7 +16,7 @@ const createUser = async (req, res) => {
     req.on('end', () => {
       let userData = JSON.parse(body);
       const user = model.createUser(userData.name, userData.email);
-      res.writeHeader(200, {"Content-Type": "application/json"});
+      res.writeHeader(201, {"Content-Type": "application/json"});
       res.write(JSON.stringify(user));
       res.end();
     });
