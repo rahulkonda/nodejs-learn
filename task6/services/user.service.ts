@@ -1,5 +1,6 @@
 import { UserEntity } from '../entities/user.entity';
 import * as UserRepository from '../repositories/user.repository';
+import OrderService from './order.service';
 
 class UserService {
   public async getCart(userId: string) {
@@ -38,6 +39,17 @@ class UserService {
     }
     // Delete cart
     UserRepository.deleteCart(userId);
+  }
+
+  public async checkout(userId: string, orderData: any) {
+    const user = UserRepository.findById(userId);
+    if (!user || !user.cart) {
+      throw new Error('User or Cart not found');
+    }
+    const orderService = new OrderService();
+    const newOrder = orderService.createOrder(userId, user.cart, orderData);
+    UserRepository.updateUser(userId, { ...user, cart: undefined }); // clear the cart
+    return newOrder;
   }
 }
 

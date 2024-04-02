@@ -7,4 +7,6 @@ router.get('/cart', userController.getCart);
 router.put('/cart', userController.updateCart);
 router.delete('/cart', userController.deleteCart);
 
+router.post('/cart/checkout', userController.checkout)
+
 export default router;

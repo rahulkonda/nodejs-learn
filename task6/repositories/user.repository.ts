@@ -8,8 +8,12 @@ const users: {[key: string]: UserEntity} = {
 };
 
 export function findById(userId: string): UserEntity | undefined {
-    console.log(this.users); // log the users
+    console.log(users); // log the users
   return users[userId];
+}
+
+export function updateUser(userId: string, user: UserEntity): void {
+    users[userId] = user;
 }
 
 export function createCart(userId: string): CartEntity {
